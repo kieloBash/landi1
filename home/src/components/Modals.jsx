@@ -1,7 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import axios from "axios";
 
-export default function AddMiner() {
+export default function AddMiner({ handleAdd }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [mineNumber, setMineNumber] = useState(0);
@@ -17,22 +18,41 @@ export default function AddMiner() {
   }
 
   function handleSubmit() {
-    const temp = {
-      mineNumber,
-      price,
-      recipient,
-    };
-    console.log(temp);
+    if (mineNumber > 0 && price > 0 && recipient) {
+      const today = new Date();
+      const month = today.toLocaleString("default", { month: "long" });
+      const day = String(today.getDate()).padStart(2, "0");
+      const year = today.getFullYear();
+      const formattedDate = `${month} ${day}, ${year}`;
 
-    setMineNumber(0);
-    setPrice(0);
-    setRecipient("");
-    closeModal();
+      const temp = {
+        recipient,
+        mineNumber,
+        price,
+        date: formattedDate,
+      };
+      console.log(temp);
+
+      axios
+        .post("http://localhost:1337/api/post", {
+          miner: temp,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+
+      setMineNumber(0);
+      setPrice(0);
+      setRecipient("");
+      closeModal();
+      handleAdd(temp);
+    }
+
   }
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center">
+      <div className="inset-0 flex items-center justify-center">
         <button
           type="button"
           onClick={openModal}

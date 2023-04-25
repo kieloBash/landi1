@@ -23,13 +23,16 @@ router.get("/get", async (req, res) => {
   const getRows = await googleSheets.spreadsheets.values.get({
     auth,
     spreadsheetId,
-    range: "Sheet1!A:B",
+    range: "Sheet2!A:C",
   });
 
   res.send(getRows.data);
 });
 
 router.post("/post", async (req, res) => {
+
+  const { miner } = req.body;
+
   const auth = new google.auth.GoogleAuth({
     keyFile: "secrets.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets",
@@ -50,12 +53,13 @@ router.post("/post", async (req, res) => {
   await googleSheets.spreadsheets.values.append({
     auth,
     spreadsheetId,
-    range: "Sheet1!A:B",
+    range: "Sheet2!A:D",
     valueInputOption: "USER_ENTERED",
     resource: {
-      values: [["LongSleeves", 30]],
+      values: [[miner.recipient, miner.mineNumber,miner.price,miner.date]],
     },
   });
+  res.send('Added Successfully');
 });
 
 module.exports = router;
