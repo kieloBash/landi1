@@ -34,6 +34,7 @@ const Mobile = () => {
 
     const uniqueArray = [...new Set(tempMiners)];
     setMiners(uniqueArray);
+    setNoItems(data.length-1);
   }, [data]);
 
   const handleAdd = (input) => {
