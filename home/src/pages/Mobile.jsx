@@ -47,7 +47,7 @@ const Mobile = () => {
     let total = 0;
 
     data.forEach((miner) => {
-      if (miner[0] === name) {
+      if (miner.Recipient === name) {
         mine.push(miner.MineNumber);
         prices.push(miner.Price);
         total += Number(miner.Price);
