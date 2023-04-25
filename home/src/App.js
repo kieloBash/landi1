@@ -5,6 +5,8 @@ import Table from "./components/Table";
 import MineNumberComponent from "./components/MineNumberComponent";
 import TotalPrice from "./components/TotalPrice";
 import Miners from "./components/Miners";
+import Hero from "./components/Hero";
+import CopiedPrompt from "./components/CopiedPrompt";
 // import FileUploadExcel from "./components/FileUploadExcel";
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
   const [mineNumbers, setMineNumbers] = useState([]);
   const [miners, setMiners] = useState([]);
   const [total, setTotal] = useState(0);
+  const [copied, setCopied] = useState(true);
 
   const [loading, setLoading] = useState(true);
 
@@ -45,8 +48,6 @@ function App() {
 
     const uniqueArray = [...new Set(tempMiners)];
     setMiners(uniqueArray);
-    
-    
   }, [data]);
 
   const handleAdd = (input) => {
@@ -59,8 +60,8 @@ function App() {
     let prices = [];
     let total = 0;
 
-    data.forEach(miner => {
-      if(miner[0]===name){
+    data.forEach((miner) => {
+      if (miner[0] === name) {
         mine.push(miner[1]);
         prices.push(miner[2]);
         total += Number(miner[2]);
@@ -68,21 +69,33 @@ function App() {
     });
 
     const copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text)
-        .then(() => console.log(`Copied "${text}" to clipboard`))
-        .catch((error) => console.error(`Error copying "${text}" to clipboard:`, error));
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          console.log(`Copied "${text}" to clipboard`);
+          setCopied(true);
+        })
+        .catch((error) =>
+          console.error(`Error copying "${text}" to clipboard:`, error)
+        );
     };
 
     const textToCopy = `${name}: ${prices} = ${total}`;
     copyToClipboard(textToCopy);
-    
-    console.log(mine,prices,total);
+
+    console.log(mine, prices, total);
+  };
+
+  const toggleClose = () =>{
+    setCopied(!copied);
   }
 
   return (
-    <div className="App flex justify-center items-center bg-blue-300 w-screen h-screen">
-      {loading ? (
-        <></>
+    <div className="App flex justify-center items-center bg-pink-300 w-screen h-screen">
+      {loading && data ? (
+        <div>
+          <Hero />
+        </div>
       ) : (
         <div className="flex w-full justify-evenly items-center flex-col md:flex-row">
           <div>
@@ -90,13 +103,21 @@ function App() {
           </div>
 
           <div className="grid grid-cols-1 gap-y-4">
-            <AddMiner handleAdd={handleAdd}/>
+            <AddMiner handleAdd={handleAdd} />
             <TotalPrice total={total} no_items={no_items} />
           </div>
 
           <div>
-            <Miners miners={miners} toggleCompute={toggleCompute}/>
+            <Miners miners={miners} toggleCompute={toggleCompute} />
           </div>
+
+          {copied ? (
+            <div className="absolute h-screen w-screen flex justify-center items-center bg-pink-300">
+              <CopiedPrompt toggleClose={toggleClose} />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       )}
     </div>
