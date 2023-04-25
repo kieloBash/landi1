@@ -8,6 +8,7 @@ export default function FileUpload({ toggleMobileData }) {
   const handleFileSelect = (event) => {
     let file = event.target.files[0];
     setSelectedFile(file);
+    console.log(selectedFile);
 
     const promise = new Promise((resolve, reject) => {
       const fileReader = new FileReader();

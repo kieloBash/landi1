@@ -3,10 +3,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { useState } from "react";
 // import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function DropDown({ miners, handleExisting }) {
   const [drop, setDrop] = useState(false);
   const handleClick = (miner) => {

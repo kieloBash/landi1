@@ -4,7 +4,7 @@ import AddMiner from "../components/Modals";
 import MineNumberComponent from "../components/MineNumberComponent";
 import TotalPrice from "../components/TotalPrice";
 import Miners from "../components/Miners";
-import Hero from "../components/Hero";
+// import Hero from "../components/Hero";
 import CopiedPrompt from "../components/CopiedPrompt";
 
 const Desktop = () => {
@@ -99,11 +99,11 @@ const Desktop = () => {
       setCopied(!copied);
     };
   
-    const toggleMobileData = (mobileData) => {
-      console.log(mobileData)
-      setData(mobileData);
-      setLoading(false);
-    }
+    // const toggleMobileData = (mobileData) => {
+    //   console.log(mobileData)
+    //   setData(mobileData);
+    //   setLoading(false);
+    // }
   
     return (
       <div className="App flex justify-center items-center bg-pink-300 w-screen h-screen">

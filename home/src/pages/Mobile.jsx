@@ -28,7 +28,7 @@ const Mobile = () => {
     let temp = [];
     let tempTotal = 0;
     let tempMiners = [];
-
+    
     for (let i = 0; i < data.length; i++) {
       if (i !== 0) {
         tempMiners.push(data[i].Recipient);
@@ -52,6 +52,7 @@ const Mobile = () => {
     };
     setData((prevArray) => [...prevArray, newArray]);
     console.log(data);
+    console.log(mineNumbers);
   };
 
   const toggleCompute = (name) => {
