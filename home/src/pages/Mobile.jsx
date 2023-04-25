@@ -99,19 +99,18 @@ const Mobile = () => {
           <Hero toggleMobileData={toggleMobileData} />
         </div>
       ) : (
-        <div className="flex w-full justify-evenly items-center flex-col md:flex-row">
+        <div className="flex w-full justify-evenly items-center flex-col md:flex-row h-full">
+          <div className="grid grid-cols-1 gap-y-4">
+            {/* <AddMiner handleAdd={handleAdd} /> */}
+            <TotalPrice total={total} no_items={no_items} />
+          </div>
+          <div>
+            <Miners miners={miners} toggleCompute={toggleCompute} />
+          </div>
           <div>
             <MineNumberComponent mineNumbers={mineNumbers} />
           </div>
 
-          <div className="grid grid-cols-1 gap-y-4">
-            <AddMiner handleAdd={handleAdd} />
-            <TotalPrice total={total} no_items={no_items} />
-          </div>
-
-          <div>
-            <Miners miners={miners} toggleCompute={toggleCompute} />
-          </div>
 
           {copied ? (
             <div className="absolute h-screen w-screen flex justify-center items-center bg-pink-300">
