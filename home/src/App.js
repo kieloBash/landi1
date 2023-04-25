@@ -15,7 +15,7 @@ function App() {
   const [mineNumbers, setMineNumbers] = useState([]);
   const [miners, setMiners] = useState([]);
   const [total, setTotal] = useState(0);
-  const [copied, setCopied] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
@@ -91,7 +91,7 @@ function App() {
       j++;
     });
 
-    const textToCopy = `${name}: ${pricesText} = ${total}`;
+    const textToCopy = `${name}:${pricesText} = ${total}`;
     copyToClipboard(textToCopy);
 
     console.log(mine, prices, total);
