@@ -47,7 +47,7 @@ const Mobile = () => {
   const handleAdd = (input) => {
     let newArray = {
       Recipient: input.recipient,
-      MineNumber: input.mineNumber,
+      // MineNumber: input.mineNumber,
       Price: input.price,
     };
     setData((prevArray) => [...prevArray, newArray]);
@@ -143,7 +143,7 @@ const Mobile = () => {
             <Miners miners={miners} toggleCompute={toggleCompute} />
           </div>
           <div className="flex">
-            <AddMinerMobile handleAdd={handleAdd} />
+            <AddMinerMobile handleAdd={handleAdd} miners={miners}/>
 
             <button
               type="button"

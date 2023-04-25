@@ -1,7 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import DropDown from "./DropDown";
 
-export default function AddMinerMobile({ handleAdd }) {
+export default function AddMinerMobile({ handleAdd, miners }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [mineNumber, setMineNumber] = useState(0);
@@ -17,7 +18,7 @@ export default function AddMinerMobile({ handleAdd }) {
   }
 
   function handleSubmit() {
-    if (mineNumber > 0 && price > 0 && recipient) {
+    if (price > 0 && recipient) {
       const today = new Date();
       const month = today.toLocaleString("default", { month: "long" });
       const day = String(today.getDate()).padStart(2, "0");
@@ -38,8 +39,11 @@ export default function AddMinerMobile({ handleAdd }) {
       closeModal();
       handleAdd(temp);
     }
-
   }
+  const handleExisting = (miner) => {
+    console.log(miner);
+    setRecipient(miner);
+  };
 
   return (
     <>
@@ -100,7 +104,10 @@ export default function AddMinerMobile({ handleAdd }) {
                     Adding New Mine
                   </Dialog.Title>
                   <div className="flex flex-col justify-evenly h-full">
-                    <div className="flex items-center mb-2">
+                    {/* <div className="flex w-full justify-end"> */}
+                    <DropDown miners={miners} handleExisting={handleExisting} />
+                    {/* </div> */}
+                    <div className="flex items-center mb-2 mt-2">
                       <div className="w-1/3">
                         <label
                           className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -119,7 +126,7 @@ export default function AddMinerMobile({ handleAdd }) {
                         />
                       </div>
                     </div>
-                    <div className="flex items-center mb-2">
+                    {/* <div className="flex items-center mb-2">
                       <div className="w-1/3">
                         <label
                           className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -137,7 +144,8 @@ export default function AddMinerMobile({ handleAdd }) {
                           onChange={(e) => setMineNumber(e.target.value)}
                         />
                       </div>
-                    </div>
+                    </div> */}
+
                     <div className="flex items-center mb-2">
                       <div className="w-1/3">
                         <label
