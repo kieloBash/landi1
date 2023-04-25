@@ -80,15 +80,26 @@ function App() {
         );
     };
 
-    const textToCopy = `${name}: ${prices} = ${total}`;
+    let pricesText = "";
+    let j = 0;
+    prices.forEach((price) => {
+      if (j === prices.length-1) {
+        pricesText += ` ${price}`;
+      } else {
+        pricesText += ` ${price} +`;
+      }
+      j++;
+    });
+
+    const textToCopy = `${name}: ${pricesText} = ${total}`;
     copyToClipboard(textToCopy);
 
     console.log(mine, prices, total);
   };
 
-  const toggleClose = () =>{
+  const toggleClose = () => {
     setCopied(!copied);
-  }
+  };
 
   return (
     <div className="App flex justify-center items-center bg-pink-300 w-screen h-screen">
