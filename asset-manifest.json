@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/landi1/static/css/main.adefb653.css",
-    "main.js": "/landi1/static/js/main.6d0c9e31.js",
-    "index.html": "/landi1/index.html",
-    "main.adefb653.css.map": "/landi1/static/css/main.adefb653.css.map",
-    "main.6d0c9e31.js.map": "/landi1/static/js/main.6d0c9e31.js.map"
+    "main.css": "/blog.landimo.com/static/css/main.adefb653.css",
+    "main.js": "/blog.landimo.com/static/js/main.6d0c9e31.js",
+    "index.html": "/blog.landimo.com/index.html",
+    "main.adefb653.css.map": "/blog.landimo.com/static/css/main.adefb653.css.map",
+    "main.6d0c9e31.js.map": "/blog.landimo.com/static/js/main.6d0c9e31.js.map"
   },
   "entrypoints": [
     "static/css/main.adefb653.css",
