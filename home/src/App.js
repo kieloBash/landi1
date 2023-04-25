@@ -1,135 +1,70 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import AddMiner from "./components/Modals";
-import Table from "./components/Table";
-import MineNumberComponent from "./components/MineNumberComponent";
-import TotalPrice from "./components/TotalPrice";
-import Miners from "./components/Miners";
-import Hero from "./components/Hero";
-import CopiedPrompt from "./components/CopiedPrompt";
-// import FileUploadExcel from "./components/FileUploadExcel";
+
+import Desktop from "./pages/Desktop";
+import Mobile from "./pages/Mobile";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [no_items, setNoItems] = useState(0);
-  const [mineNumbers, setMineNumbers] = useState([]);
-  const [miners, setMiners] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [copied, setCopied] = useState(false);
+  const [choice, setChoice] = useState(0);
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios.get("http://localhost:1337/api/get").then((res) => {
-      // console.log(res.data.values);
-      setData(res.data.values);
-      setNoItems(res.data.values.length - 1);
-
-      if (res.data.values) {
-        setLoading(false);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    let temp = [];
-    let tempTotal = 0;
-    let tempMiners = [];
-
-    for (let i = 0; i < data.length; i++) {
-      if (i !== 0) {
-        tempMiners.push(data[i][0]);
-        temp.push(data[i][1]);
-        tempTotal += Number(data[i][2]);
-      }
-    }
-    setMineNumbers(temp);
-    setTotal(tempTotal);
-
-    const uniqueArray = [...new Set(tempMiners)];
-    setMiners(uniqueArray);
-  }, [data]);
-
-  const handleAdd = (input) => {
-    let newArray = [input.recipient, input.mineNumber, input.price];
-    setData((prevArray) => [...prevArray, newArray]);
-  };
-
-  const toggleCompute = (name) => {
-    let mine = [];
-    let prices = [];
-    let total = 0;
-
-    data.forEach((miner) => {
-      if (miner[0] === name) {
-        mine.push(miner[1]);
-        prices.push(miner[2]);
-        total += Number(miner[2]);
-      }
-    });
-
-    const copyToClipboard = (text) => {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          console.log(`Copied "${text}" to clipboard`);
-          setCopied(true);
-        })
-        .catch((error) =>
-          console.error(`Error copying "${text}" to clipboard:`, error)
-        );
-    };
-
-    let pricesText = "";
-    let j = 0;
-    prices.forEach((price) => {
-      if (j === prices.length-1) {
-        pricesText += ` ${price}`;
-      } else {
-        pricesText += ` ${price} +`;
-      }
-      j++;
-    });
-
-    const textToCopy = `${name}:${pricesText} = ${total}`;
-    copyToClipboard(textToCopy);
-
-    console.log(mine, prices, total);
-  };
-
-  const toggleClose = () => {
-    setCopied(!copied);
+  const toggleChoice = (i) => {
+    setChoice(i);
   };
 
   return (
     <div className="App flex justify-center items-center bg-pink-300 w-screen h-screen">
-      {loading && data ? (
-        <div>
-          <Hero />
-        </div>
-      ) : (
-        <div className="flex w-full justify-evenly items-center flex-col md:flex-row">
-          <div>
-            <MineNumberComponent mineNumbers={mineNumbers} />
-          </div>
-
-          <div className="grid grid-cols-1 gap-y-4">
-            <AddMiner handleAdd={handleAdd} />
-            <TotalPrice total={total} no_items={no_items} />
-          </div>
-
-          <div>
-            <Miners miners={miners} toggleCompute={toggleCompute} />
-          </div>
-
-          {copied ? (
-            <div className="absolute h-screen w-screen flex justify-center items-center bg-pink-300">
-              <CopiedPrompt toggleClose={toggleClose} />
+      {choice === 0 ? (
+        <>
+          <div className="flex flex-col md:flex-row">
+            <div className="inset-0 flex items-center justify-center">
+              <button
+                type="button"
+                onClick={(e) => toggleChoice(1)}
+                className="mr-0 mb-5 md:mb-0 md:mr-5 py-2 px-4 flex items-center bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-36 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6v12m6-6H6"
+                  />
+                </svg>
+                <h1 className="mb-[3px] ml-[5px]">Laptop</h1>
+              </button>
             </div>
-          ) : (
-            <></>
-          )}
-        </div>
+            <div className="inset-0 flex items-center justify-center">
+              <button
+                type="button"
+                onClick={(e) => toggleChoice(2)}
+                className="py-2 px-4 flex items-center bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-36 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6v12m6-6H6"
+                  />
+                </svg>
+                <h1 className="mb-[3px] ml-[5px]">Mobile</h1>
+              </button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>{choice === 1 ? <><Desktop></Desktop></> : <><Mobile></Mobile></>}</>
       )}
     </div>
   );
