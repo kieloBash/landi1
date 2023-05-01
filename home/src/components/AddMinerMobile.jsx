@@ -10,6 +10,9 @@ export default function AddMinerMobile({ handleAdd, miners }) {
   const [recipient, setRecipient] = useState("");
 
   function closeModal() {
+    setMineNumber(0);
+    setPrice(0);
+    setRecipient("");
     setIsOpen(false);
   }
 
@@ -35,8 +38,8 @@ export default function AddMinerMobile({ handleAdd, miners }) {
 
       setMineNumber(0);
       setPrice(0);
-      setRecipient("");
-      closeModal();
+      // setRecipient("");
+      // closeModal();
       handleAdd(temp);
     }
   }
@@ -170,17 +173,17 @@ export default function AddMinerMobile({ handleAdd, miners }) {
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     <button
                       type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
                       className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={handleSubmit}
                     >
                       Confirm
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Close
                     </button>
                   </div>
                 </Dialog.Panel>
