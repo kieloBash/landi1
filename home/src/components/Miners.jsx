@@ -6,7 +6,7 @@ const Miners = ({ miners, toggleCompute }) => {
       <p className="mb-6 text-xl text-center font-medium text-gray-600 dark:text-white">
         Miners Today
       </p>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 max-h-[10rem] w-[11rem] overflow-y-auto overflow-x-hidden">
         {miners.map((miner, index) => {
           const min = 1; // minimum value
           const max = 5; // maximum value
