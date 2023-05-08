@@ -10,6 +10,7 @@ import AddMinerMobile from "../components/AddMinerMobile";
 
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import EditMinerMobile from "../components/EditMinerMobile";
 
 const Mobile = () => {
   const [data, setData] = useState([]);
@@ -29,12 +30,14 @@ const Mobile = () => {
     let tempTotal = 0;
     let tempMiners = [];
 
+    console.log(data);
+
     for (let i = 0; i < data.length; i++) {
-      if (i !== 0) {
+      // if (i !== 0) {
         tempMiners.push(data[i].Recipient);
         temp.push(data[i].MineNumber);
         tempTotal += Number(data[i].Price);
-      }
+      // }
     }
     setMineNumbers(temp);
     setTotal(tempTotal);
@@ -151,7 +154,7 @@ const Mobile = () => {
                 <button
                   type="button"
                   onClick={downloadAsExcel}
-                  className="ml-2 py-2 px-4 flex justify-center items-center  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  w-12 h-12 rounded-lg "
+                  className="ml-2 mr-2  py-2 px-4 flex justify-center items-center  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  w-12 h-12 rounded-lg "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -166,6 +169,7 @@ const Mobile = () => {
                     />
                   </svg>
                 </button>
+                <EditMinerMobile data={data} miners={miners} setData={setData}/>
 
                 {/* <MineNumberComponent mineNumbers={mineNumbers} /> */}
               </div>

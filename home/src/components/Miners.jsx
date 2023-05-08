@@ -16,6 +16,7 @@ const Miners = ({ miners, toggleCompute }) => {
     } else {
       setSearchMiners(miners);
     }
+    console.log(miners);
   }, [search,miners]);
 
   return (
