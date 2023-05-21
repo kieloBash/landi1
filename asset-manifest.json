@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/landi1/static/css/main.d9a2156e.css",
-    "main.js": "/landi1/static/js/main.ef8e044d.js",
+    "main.js": "/landi1/static/js/main.db0be33b.js",
     "index.html": "/landi1/index.html",
     "main.d9a2156e.css.map": "/landi1/static/css/main.d9a2156e.css.map",
-    "main.ef8e044d.js.map": "/landi1/static/js/main.ef8e044d.js.map"
+    "main.db0be33b.js.map": "/landi1/static/js/main.db0be33b.js.map"
   },
   "entrypoints": [
     "static/css/main.d9a2156e.css",
-    "static/js/main.ef8e044d.js"
+    "static/js/main.db0be33b.js"
   ]
 }
