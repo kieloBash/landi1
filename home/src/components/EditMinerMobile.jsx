@@ -190,7 +190,7 @@ const EditMinerMobile = ({ data, miners, setData }) => {
                                   {miner.name}
                                 </h1>
                                 <h1 className="text-lg font-normal">
-                                  {miner.cart.length} items
+                                  {miner.cart.length} item
                                 </h1>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
